@@ -1,24 +1,13 @@
 class Sieve 
-
 	def initialize(limit) 
 		@range = (2..limit)
 	end
 
 	def primes
-		return [] if @range.last < 2
-
-		multiples = []
-
-		@range.each do |n|
-				next if multiples.include? n
-
-			(n+1..@range.last).each do |i|
-				multiples << i if i % n == 0
-			end
-
-		end
-
-		@range.to_a - multiples
+		@range.to_a - @range.flat_map { |i| multiples_of(i) }
 	end
 
+	def multiples_of(number)
+		((number * 2)..@range.last).step(number).to_a
+	end
 end
