@@ -17,15 +17,20 @@ Print an integer denoting the zero-indexed position of the character that makes 
 ## Sample Input
 
 3
+
 aaab
+
 baa
+
 aaa
 
 
 ## Sample Output
 
 3
+
 0
+
 -1
 
 ## run tests
