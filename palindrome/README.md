@@ -20,7 +20,7 @@ Print an integer denoting the zero-indexed position of the character that makes 
 aaab
 baa
 aaa
-Sample Output
+
 
 ## Sample Output
 
