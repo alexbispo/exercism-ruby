@@ -21,7 +21,7 @@ class LeftRotation
 		end
 		@integers.join(" ")
 	end
-	
+
 end
 
 if __FILE__ == $0
