@@ -1,47 +1,34 @@
 #!/usr/bin/env ruby
 
-class Palindrome 
+module Palindrome
 
-  def initialize(number_of_test_cases, test_cases)
-    if number_of_test_cases < 1 or number_of_test_cases > 20
-      raise ArgumentError, "number of test cases must be between 1 and 20"
+  # usando recursividade, menos performático
+  # def self.find_strange_index(i = -1, c = "", s)
+  #   s == s.reverse ? i : find_strange_index(i+1, s.insert(i, c).slice!(i+1), s)
+  # end
+
+  def self.find_strange_index(str)
+    if str.length < 1 or str.length > 100_005
+      raise ArgumentError, "the string muste be between 1 and 100_005"
     end
 
-    @number_of_test_cases = number_of_test_cases
-    @test_cases = test_cases
-  end
-
-  def index
-    result = []
-    limit = @number_of_test_cases -1
-    for i in (0..limit)
-      str = @test_cases[i]
-      cp = str.clone
-      if cp.reverse == cp
-        result << -1
-        next
+    str.downcase!
+    return -1 if str.reverse == str
+    sl = str.length - 1
+    for i in (0..sl)
+      s = str.slice!(i)
+      if str == str.reverse
+        return i
       end
-
-      inner_limit = cp.length - 1
-      for j in (0..inner_limit) 
-        str.slice!(j)
-        if str.reverse == str
-          result << j
-          break
-        end
-        str = cp.clone
-      end
+      str.insert(i, s)
     end
-    result
   end
 end
 
+
 if __FILE__ == $0
   t = gets.chomp.to_i
-  test_cases = []
-  for i in (1..t)
-    test_cases << gets.chomp
-  end
-  output = Palindrome.new(t, test_cases).index
+  raise(ArgumentError, "the number of test must be between 1 and 20 ") if t < 1 or t > 20 
+  output = (1..t).map {  Palindrome.find_strange_index(gets.chomp) }
   output.each { |e| puts e }
 end
