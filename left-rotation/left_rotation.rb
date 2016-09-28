@@ -2,15 +2,15 @@
 
 class LeftRotation
 
-  def initialize(array_length, number_of_rotations, initial_state)
-    if array_length < 1 or array_length > 100_000
-      raise ArgumentError, "array_length must be between 1 and 100_000"
+  def initialize(number_of_integers, number_of_rotations, initial_state)
+    if number_of_integers < 1 or number_of_integers > 100_000
+      raise ArgumentError, "the number of integers must be between 1 and 100_000"
     end
-    if number_of_rotations < 1 or number_of_rotations > array_length
-      raise ArgumentError, "number_of_rotations must be between 1 and array_length"
+    if number_of_rotations < 1 or number_of_rotations > number_of_integers
+      raise ArgumentError, "number of rotations must be between 1 and the number of integers"
     end
 
-    @integers = initial_state.split(" ").each { |e| e.to_i }
+    @integers = initial_state.split(" ").map { |e| e.to_i }
     @number_of_rotations = number_of_rotations
   end
 
@@ -24,7 +24,7 @@ class LeftRotation
 end
 
 if __FILE__ == $0
-  n, d = gets.chomp.split(" ")
+  number_of_integers, number_of_rotations = gets.chomp.split(" ")
   state = gets.chomp
-  puts LeftRotation.new(n.to_i, d.to_i, state).call
+  puts LeftRotation.new(number_of_integers.to_i, number_of_rotations.to_i, state).call
 end
